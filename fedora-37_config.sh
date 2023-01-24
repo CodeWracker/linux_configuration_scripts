@@ -26,81 +26,31 @@ do
     clear
     options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}")
     printf 'escolha o que deve ser feito:%s\n'
-    for i in {0..15}
+    for i in {0..${#options[@]}}
     do
         echo "${i}) ${options[i]}"
     done
     read -p "Selcionado: " opt
-    case $opt in
-        0)
-            break
-        ;;
-        1)
+    
+    if [ $opt -lt ${#options[@]} ] && [ $opt -ge 1 ]; then
+        if [ $opt -eq 1 ]; then
             # Seleciona/desmarca todas as opções
-            for i in {2..5}
+            for i in {2..${#options[@]}}
             do
                 opts[i]=+
             done
             choice 1
-        ;;
-        2)
+        else
             verify_option_all
-            choice 2
-        ;;
-        3)
-            verify_option_all
-            choice 3
-        ;;
-        4)
-            verify_option_all
-            choice 4
-        ;;
-        5)
-            verify_option_all
-            choice 5
-        ;;
-        6)
-            verify_option_all
-            choice 6
-        ;;
-        7)
-            verify_option_all
-            choice 7
-        ;;
-        8)
-            verify_option_all
-            choice 8
-        ;;
-        9)
-            verify_option_all
-            choice 9
-        ;;
-        10)
-            verify_option_all
-            choice 10
-        ;;
-        11)
-            verify_option_all
-            choice 11
-        ;;
-        12)
-            verify_option_all
-            choice 12
-        ;;
-        13)
-            verify_option_all
-            choice 13
-        ;;
-        14)
-            verify_option_all
-            choice 14
-        ;;
-        15)
-            verify_option_all
-            choice 15
-        ;;
-        *) printf '%s\n' 'Opção inválida';;
-    esac
+            choice $opt
+        fi
+    else
+        printf '%s\n' 'Opção inválida'
+    fi
+    if [ $opt -eq 0 ]; then
+        break
+    fi
+    
     
 done
 
