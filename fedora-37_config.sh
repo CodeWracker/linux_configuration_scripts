@@ -24,9 +24,9 @@ verify_option_all (){
 while :
 do
     clear
-    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}")
+    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}")
     printf 'escolha o que deve ser feito:%s\n'
-    for i in {0..9}
+    for i in {0..10}
     do
         echo "${i}) ${options[i]}"
     done
@@ -74,6 +74,22 @@ do
         9)
             verify_option_all
             choice 9
+        ;;
+        10)
+            verify_option_all
+            choice 10
+        ;;
+        11)
+            verify_option_all
+            choice 11
+        ;;
+        12)
+            verify_option_all
+            choice 12
+        ;;
+        13)
+            verify_option_all
+            choice 13
         ;;
         *) printf '%s\n' 'Opção inválida';;
     esac
@@ -163,6 +179,45 @@ then
     clear
 fi
 
+# Instala o wine
+if [[ ${opts[10]} ]]
+then
+    sudo dnf install wine -y
+    clear
+fi
+
+# Instala o discord
+if [[ ${opts[11]} ]]
+then
+    # Baixar o pacote do Discord
+    curl -o discord.rpm -L https://discordapp.com/api/download?platform=linux&format=rpm
+    
+    # Instalar o pacote do Discord
+    sudo dnf install discord.rpm -y
+    
+    # Remover o pacote baixado
+    rm discord.rpm
+    clear
+fi
+
+# Instala o spotify
+if [[ ${opts[12]} ]]
+then
+    # Adicionando o repositório do Spotify
+    sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+    
+    # Instalando o Spotify
+    sudo dnf install spotify-client -y
+    clear
+fi
+
+# Instala o gcc/g++
+if [[ ${opts[13]} ]]
+then
+    sudo dnf install gcc-c++ -y
+    clear
+fi
+
 # instruções para mais configurações
 
 # Onedriver
@@ -214,4 +269,10 @@ if [[ ${opts[9]} ]]
 then
     printf "Para descompactar um arquivo rar digite: unrar e <nome do arquivo> %s\n"
     printf "Para descompactar um arquivo zip digite: unzip <nome do arquivo> %s\n"
+fi
+
+# wine
+if [[ ${opts[10]} ]]
+then
+    printf "Para instalar um programa no wine digite: wine <nome do programa> %s\n"
 fi
