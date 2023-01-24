@@ -24,9 +24,9 @@ verify_option_all (){
 while :
 do
     clear
-    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}")
+    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}")
     printf 'escolha o que deve ser feito:%s\n'
-    for i in {0..10}
+    for i in {0..15}
     do
         echo "${i}) ${options[i]}"
     done
@@ -90,6 +90,14 @@ do
         13)
             verify_option_all
             choice 13
+        ;;
+        14)
+            verify_option_all
+            choice 14
+        ;;
+        15)
+            verify_option_all
+            choice 15
         ;;
         *) printf '%s\n' 'Opção inválida';;
     esac
@@ -218,6 +226,20 @@ then
     clear
 fi
 
+# Instala o nodejs
+if [[ ${opts[14]} ]]
+then
+    sudo dnf module install nodejs:$(dnf module list nodejs | awk '/^\*/ {print $2}') -y
+    clear
+fi
+
+# Instala o git
+if [[ ${opts[15]} ]]
+then
+    sudo dnf install git -y
+    clear
+fi
+
 # instruções para mais configurações
 
 # Onedriver
@@ -275,4 +297,40 @@ fi
 if [[ ${opts[10]} ]]
 then
     printf "Para instalar um programa no wine digite: wine <nome do programa> %s\n"
+fi
+
+# discord
+if [[ ${opts[11]} ]]
+then
+    printf "Abra o discord e faça o login %s\n"
+fi
+
+# spotify
+if [[ ${opts[12]} ]]
+then
+    printf "Abra o spotify e faça o login %s\n"
+fi
+
+# gcc/g++
+if [[ ${opts[13]} ]]
+then
+    printf "Para compilar um arquivo c++ digite: g++ <nome do arquivo> -o <nome do executavel> %s\n"
+    printf "Para ver a versão do gcc/g++ digite: g++ --version %s\n"
+    g++ --version
+fi
+
+# nodejs
+if [[ ${opts[14]} ]]
+then
+    printf "Para ver a versão do nodejs digite: node --version %s\n"
+    node --version
+    printf "Para ver a versão do npm digite: npm --version %s\n"
+    npm --version
+fi
+
+# git
+if [[ ${opts[15]} ]]
+then
+    printf "Para ver a versão do git digite: git --version %s\n"
+    git --version
 fi
