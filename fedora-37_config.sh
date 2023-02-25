@@ -24,7 +24,7 @@ verify_option_all (){
 while :
 do
     clear
-    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}")
+    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}", "Instalar qBitTorrent ${opts[16]}", "Instalar Docker ${opts[17]}")
     printf 'escolha o que deve ser feito:%s\n'
     for i in {0..${#options[@]}}
     do
@@ -190,6 +190,28 @@ then
     clear
 fi
 
+# Instala o qbittorrent
+if [[ ${opts[16]} ]]
+then
+    sudo dnf install qbittorrent -y
+    clear
+fi
+
+
+# Instala o Docker
+if [[ ${opts[17]} ]]
+then
+    # Adiciona o repositório do Docker
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo -y
+    sudo dnf -y install dnf-plugins-core
+    
+    # Instala o Docker Engine
+    sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+    
+fi
+
+
+# -------------------------------------------------------------------------------------------------
 # instruções para mais configurações
 
 # Onedriver
@@ -283,4 +305,23 @@ if [[ ${opts[15]} ]]
 then
     printf "Para ver a versão do git digite: git --version %s\n"
     git --version
+fi
+
+
+# qbittorrent
+if [[ ${opts[16]} ]]
+then
+    printf "Para abrir o qbittorrent digite: qbittorrent %s\n"
+    printf "Para ver a versão do qbittorrent digite: qbittorrent --version %s\n"
+    qbittorrent --version
+fi
+
+# Docker
+if [[ ${opts[17]} ]]
+then
+    printf "Para ver a versão do docker digite: docker --version %s\n"
+    docker --version
+    printf "Para ver a versão do docker-compose digite: docker-compose --version %s\n"
+    docker-compose --version
+    printf "Para iniciar o docker digite: sudo systemctl start docker %s\n"
 fi
