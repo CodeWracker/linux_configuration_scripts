@@ -24,7 +24,7 @@ verify_option_all (){
 while :
 do
     clear
-    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}", "Instalar qBitTorrent ${opts[16]}", "Instalar Docker ${opts[17]}")
+    options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}", "Instalar qBitTorrent ${opts[16]}", "Instalar Docker ${opts[17]}", "Configurar discos externos ${opts[18]}")
     printf 'escolha o que deve ser feito:%s\n'
     for i in {0..${#options[@]}}
     do
@@ -325,3 +325,38 @@ then
     docker-compose --version
     printf "Para iniciar o docker digite: sudo systemctl start docker %s\n"
 fi
+
+# discos
+if [[ ${opts[18]}]]
+then
+
+    config_disks = 1
+    while [ $config_disks -eq 1 ]
+
+        printf "Para listar os discos não montados digite: sudo fdisk -l %s\n"
+
+        ## tutorial para dar um nome ao disco (cria uma pasta com esse nome e monta nela)
+        printf "Qual disco você quer dar um nome? %s\n"
+        read -r disco
+
+        printf "Qual nome você quer dar para o disco? %s\n"
+        read -r nome
+
+        sudo mkdir /mnt/$nome
+        sudo mount /dev/$disco /mnt/$nome
+
+        printf "Para desmontar o disco digite: sudo umount /dev/$disco %s\n"
+
+        printf "Deseja dar um nome para outro disco? %s\n"
+        printf "1 - Sim %s\n"
+        printf "2 - Não %s\n"
+        read -r config_disks
+
+    done
+
+fi
+
+
+
+# -------------------------------------------------------------------------------------------------
+# Fim do script
