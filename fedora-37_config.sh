@@ -368,7 +368,7 @@ do
     if [[ ${opts[$i]} ]]
     then
         # existem 2 opções a menos no array de programas
-        printf "%s %s\n" "${programas[$i-2]}"
+        printf "%s %s\n" "${programas[$i-2]}" 
     fi
 done
 
