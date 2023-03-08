@@ -25,6 +25,7 @@ while :
 do
     clear
     options=("Pronto" "Seleciona Tudo ${opts[1]}" "Instalar Onedriver ${opts[2]}" "Instalar Steam ${opts[3]}" "Instalar VSCode ${opts[4]}" "Configurar alias: cls -> clear ${opts[5]}" "Instalar python 3.9 ${opts[6]}" "Instalar Microsoft Edge ${opts[7]}" "Instalar o PIP ${opts[8]}" "Instalar unrar e unzip ${opts[9]}" "Instalar wine ${opts[10]}" "Instalar discord ${opts[11]}" "Instalar spotify ${opts[12]}" "Instalar GCC/G++ ${opts[13]}" "Instalar o nodeJS ${opts[14]}" "Instalar o git ${opts[15]}", "Instalar qBitTorrent ${opts[16]}", "Instalar Docker ${opts[17]}", "Configurar discos externos ${opts[18]}")
+    programas=( "Onedriver" "Steam" "VSCode" "Alias" "Python 3.9" "Microsoft Edge" "PIP" "unrar e unzip" "wine" "discord" "spotify" "GCC/G++" "nodeJS" "git" "qBitTorrent" "Docker" "Discos Externos")
     printf 'escolha o que deve ser feito:%s\n'
     for i in {0..${#options[@]}}
     do
@@ -356,7 +357,20 @@ then
 
 fi
 
+# -------------------------------------------------------------------------------------------------
 
+# lista de programas instalados
+printf "Programas instalados: %s\n"
+
+# loop para mostrar os programas instalados
+for i in "${!opts[@]}"
+do
+    if [[ ${opts[$i]} ]]
+    then
+        # existem 2 opções a menos no array de programas
+        printf "%s %s\n" "${programas[$i-2]}"
+    fi
+done
 
 # -------------------------------------------------------------------------------------------------
 # Fim do script
